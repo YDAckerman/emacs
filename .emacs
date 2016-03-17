@@ -76,6 +76,9 @@
 (scroll-bar-mode -1)
 (menu-bar-mode -1) 
 
+;; delete selection as in standard text editing
+(delete-selection-mode 1)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;          lisp functions
@@ -163,7 +166,7 @@
 ;;          ace-window
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(global-set-key (kbd "M-p") 'ace-window)
+(global-set-key (kbd "M-P") 'ace-window)
 (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -182,9 +185,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; see http://beatofthegeek.com/2014/02/my-setup-for-using-emacs-as-web-browser.html
 ;; for details
-(setq exec-path (cons "/usr/local/Cellar/w3m/0.5.3/bin/w3m" exec-path))
-(setq browse-url-browser-function 'w3m-browse-url)
-(autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
-;; optional keyboard short-cut
-(global-set-key "\C-xm" 'browse-url-at-point)
-(setq w3m-use-cookies t)
+;; (setq exec-path (cons "/usr/local/Cellar/w3m/0.5.3/bin/w3m" exec-path))
+;; (setq browse-url-browser-function 'w3m-browse-url)
+;; (autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
+;; ;; optional keyboard short-cut
+;; (global-set-key "\C-xm" 'browse-url-at-point)
+;; (setq w3m-use-cookies t)
