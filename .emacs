@@ -79,6 +79,9 @@
 ;; delete selection as in standard text editing
 (delete-selection-mode 1)
 
+;; set emacs start buffer to be a shell
+(switch-to-buffer (get-buffer-create (shell)))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;          lisp functions
