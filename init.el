@@ -39,8 +39,19 @@
           ?# ?# return
           ?# ?# ?\- ?\C-u ?5 ?7 ?# ])
 
-(fset 'nr
-   [?\M-x ?e ?s ?s tab ?s ?w ?i tab ?p ?r ?o tab return])
+;; comment-break macro
+(fset 'section-break
+      [?# ?# ?\- ?\C-u ?7 ?7 ?# return
+          ?# ?# return
+          ?# ?# ?\- ?\C-u ?7 ?7 ?# ])
+
+;; ;; move to the next R terminal
+;; (fset 'nr
+;;       [?\M-x ?e ?s ?s tab ?s ?w ?i tab ?p ?r ?o tab return])
+
+;; ;; make a todolist item
+;; (fset 'tli
+;;    [?* ?* ?\s ?T ?O ?D ?O ?\s])
 
 ;; iterator macro
 (fset 'iterator
@@ -50,13 +61,16 @@
 (fset 'reset-iterator
    [?\C-x ?\C-k ?\C-c ?0 return])
 
+;; highlight the current line
+(setq-default hl-mode t)
+
 ;; go straight to an empty buffer
 (setq  inhibit-startup-message t)
 
 (setq-default indent-tabs-mode nil)
 (define-key text-mode-map (kbd "<tab>") 'tab-to-tab-stop)
-(setq-default tab-stop-list (number-sequence 2 120 2))
-(setq-default tab-width 2)
+(setq-default tab-stop-list (number-sequence 4 120 4))
+(setq-default tab-width 4)
 
 ;;set CUA mode
 (cua-selection-mode 1)
