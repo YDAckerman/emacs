@@ -25,6 +25,7 @@
 (require 'neotree)
 (global-set-key [f8] 'neotree-toggle)
 
+
 ;; add the theme of the moment
 (setq nord-comment-brightness 20)
 (setq nord-region-highlight "snowstorm")
@@ -70,6 +71,7 @@
 ;; ;; make a todolist item
 ;; (fset 'tli
 ;;    [?* ?* ?\s ?T ?O ?D ?O ?\s])
+
 
 ;; iterator macro
 (fset 'iterator
@@ -118,13 +120,24 @@
 ;; remove interface bars to look BA
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
-(menu-bar-mode -1)
+(menu-bar-mode -1) 
+
 
 ;; delete selection as in standard text editing
 (delete-selection-mode 1)
 
 ;; set emacs start buffer to be a shell
 ;; (switch-to-buffer (get-buffer-create (shell)))
+
+;; keyboard macro to insert skeleton for R documentation
+(fset 'R-fundocs
+   (lambda (&optional arg) "Keyboard macro." (interactive "p") (
+   kmacro-exec-ring-item (quote (
+   [35 39 32 70 117 110 99 116 105 111 110 32 78 97 109 101 return 
+   return 70 117 110 99 116 105 111 110 32 68 101 115 99 114 105 
+   112 116 105 111 110 return 64 112 97 114 97 109 return 64 107 
+   101 121 119 111 114 100 115 return 64 101 120 112 111 114 116 
+   return 64 101 120 97 109 112 108 101 115] 0 "%d")) arg)))
 
 ;; display time
 (display-time-mode 1)
@@ -147,6 +160,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (require 'direx)
 (global-set-key (kbd "C-x C-j") 'direx:jump-to-directory)
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
