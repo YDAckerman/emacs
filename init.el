@@ -55,10 +55,8 @@
           ?# ?# return
           ?# ?# ?\- ?\C-u ?5 ?7 ?# ])
 
-;; I am sick as fuck of hitting C-{ instead of M-P and closing all my windows
-;; 'nil isn't working, so I'll set it to something innocuous. This doesn't
-;; work either. FUUUUUUUUUUUCK. FUCKing so annoying.
-(global-set-key (kbd "C-{") 'next-line)
+;; doesn't work. 
+;; (global-set-key (kbd "C-{") 'next-line)
 
 ;; comment-break macro
 (fset 'section-break
