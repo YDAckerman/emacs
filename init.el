@@ -17,23 +17,30 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(setq ess-use-flymake nil)
+
 ;; stop with the backups
 (setq make-backup-files nil)
 (setq auto-save-default nil)
 
-;; some dired shit
-(require 'neotree)
-(global-set-key [f8] 'neotree-toggle)
+;; I've forgotten what this is
+;; ;; something dired
+;; (require 'neotree)
+;; (global-set-key [f8] 'neotree-toggle)
+
 
 
 ;; add the theme of the moment
-(setq nord-comment-brightness 20)
-(setq nord-region-highlight "snowstorm")
-(load-theme 'nord t)
+;; (setq nord-comment-brightness 20)
+;; (setq nord-region-highlight "snowstorm")
+(load-theme 'monokai t)
+;; (load-theme 'solarized-light t)
 
 
 ;; I need more rainbows
 (require 'rainbow-delimiters)
+(add-hook 'dockerfile-mode-hook #'rainbow-delimiters-mode)
+(add-hook 'terraform-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'ess-mode-hook #'rainbow-delimiters-mode)
 (add-hook 'R-mode-hook #'rainbow-delimiters-mode)
@@ -47,11 +54,6 @@
       [?# ?# ?\- ?\C-u ?5 ?7 ?# return
           ?# ?# return
           ?# ?# ?\- ?\C-u ?5 ?7 ?# ])
-
-
-;; temp macro to clean shit
-;; (fset 'clean-trap-data
-;;    (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([67108896 134217790 134217848 114 101 112 108 97 99 101 return 115 116 114 105 110 103 return 17 33554442 return 32 return 134217788 134217848 114 101 112 108 97 99 101 return 115 116 114 105 110 103 return 32 74 117 return 17 10 74 117 return 134217848 114 101 112 108 97 99 101 return 115 116 114 105 110 103 return 32 77 97 return 17 10 77 97 return] 0 "%d")) arg)))
 
 ;; I am sick as fuck of hitting C-{ instead of M-P and closing all my windows
 ;; 'nil isn't working, so I'll set it to something innocuous. This doesn't
@@ -93,10 +95,10 @@
 (setq-default tab-width 4)
 
 ;;set CUA mode
-(cua-selection-mode 1)
+(cua-selection-mode t)
 
 ;;automatic linum mode
-(global-linum-mode 1)
+(global-linum-mode t)
 
 ;;Programming conveniences:
 (show-paren-mode t); light-up matching parens
@@ -118,16 +120,12 @@
                             (?\{ . ?\}) ) )
 
 ;; remove interface bars to look BA
-(tool-bar-mode -1)
+(tool-bar-mode t)
 (scroll-bar-mode -1)
-(menu-bar-mode -1) 
-
+(menu-bar-mode t) 
 
 ;; delete selection as in standard text editing
 (delete-selection-mode 1)
-
-;; set emacs start buffer to be a shell
-;; (switch-to-buffer (get-buffer-create (shell)))
 
 ;; keyboard macro to insert skeleton for R documentation
 (fset 'R-fundocs
@@ -149,9 +147,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (setq org-log-done t)
 (require 'org)
-(define-key global-map "\C-cl" 'org-store-link)
-(define-key global-map "\C-ca" 'org-agenda)
-
+(global-set-key (kbd "C-c l") #'org-store-link)
+(global-set-key (kbd "C-c a") #'org-agenda)
+(global-set-key (kbd "C-c c") #'org-capture)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -161,6 +159,15 @@
 (require 'direx)
 (global-set-key (kbd "C-x C-j") 'direx:jump-to-directory)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;          julia
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(add-to-list 'load-path "/Applications/Julia-1.6.app/Contents/Resources/julia/bin/julia")
+(require 'julia-repl)
+(add-hook 'julia-mode-hook 'julia-repl-mode) ;; always use minor mode
+(set-language-environment "UTF-8")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -213,6 +220,17 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;          Python
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(elpy-enable)
+;; (setq python-shell-interpreter "/usr/local/opt/python@3.9/bin/python3.9")
+
+(add-hook 'after-init-hook 'global-company-mode)
+;; (setq lsp-pyls-plugins-pycodestyle-enabled nil)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;          R
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -234,18 +252,6 @@
    112 116 105 111 110 return 64 112 97 114 97 109 return 64 107
    101 121 119 111 114 100 115 return 64 101 120 112 111 114 116
    return 64 101 120 97 109 112 108 101 115] 0 "%d")) arg)))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;          Emacs IPython Notebook
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(require 'ein)
-;; see https://stackoverflow.com/questions/31877966/use-ein-emacs-ipython-notebook-on-remote-server
-;; for how to connect to remote. looks like you'll
-;; need to write a macro that tunnels from local
-;; port to remote port then connect to the local
-;; Port using EIN.
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -288,11 +294,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   (quote
-    ("7527f3308a83721f9b6d50a36698baaedc79ded9f6d5bd4e9a28a22ab13b3cb1" default)))
+   '("7527f3308a83721f9b6d50a36698baaedc79ded9f6d5bd4e9a28a22ab13b3cb1" default))
  '(package-selected-packages
-   (quote
-    (pyenv-mode haskell-mode neotree direx ein rainbow-delimiters polymode nord-theme multiple-cursors markdown-mode column-marker ace-window))))
+   '(solarized-theme magit lsp-mode terraform-mode yaml-mode dockerfile-mode monokai-theme company pyvenv-auto elpy dash julia-repl pyenv-mode haskell-mode neotree direx ein rainbow-delimiters polymode nord-theme multiple-cursors markdown-mode column-marker ace-window)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
